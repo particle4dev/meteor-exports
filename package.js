@@ -1,6 +1,6 @@
 Package.describe({
     summary: "exports some private function",
-    version: "0.0.0",
+    version: "1.1.0",
     name: "particle4dev:exports",
     git: "https://github.com/particle4dev/meteor-exports.git"
 });
@@ -12,8 +12,7 @@ both          = ['server', 'client'];
 Package.onUse(function(api) {
     api.versionsFrom('METEOR@0.9.1.1');
 
-    api.use('underscore', both);
-    api.use('mongo', both);
+    api.use(['underscore', 'mongo'], both);
     api.use('accounts-base');
 
     api.use('blaze');
@@ -25,12 +24,19 @@ Package.onUse(function(api) {
 
     // aggregation 
     api.addFiles('src/mongoAggregation/server.js', server);
+    // map reduce 
+    api.addFiles('src/mongoMapreduce/server.js', server);
+
+    // index
+    api.addFiles('src/mongoIndex.js', server);
 
     // blaze
     api.addFiles('src/blaze/client.js', client);
 
     //exports
     api.export('aggregates', server);
+    api.export('mapreduce', server);
+    api.export('MongoIndex', server);
 
     //blaze
     api.export('_toText', client);
