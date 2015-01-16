@@ -23,7 +23,7 @@ var Connections = (function(){
     }
 */
 
-UsersOnline = new Meteor.Collection('usersonline', {
+UsersOnline = new Meteor.Collection(collectionUserName, {
     connection: null
 });
 
@@ -121,19 +121,18 @@ UsersOnline.setUserTransform = function (func) {
 };
 
 /**
- *
+ * Public API
  */
-Meteor.methods({
-    'sendMessageToUser': function(userId, message){
-        var self = this;
-        var sender = Meteor.users.findOne(self.userId);
-        UsersOnline.find({'user._id': { $in: [userId, self.userId] }}).forEach(function(conn){
-            Connections.sendMessage(conn.connection, {
-                userId: sender._id,
-                image: sender.profile.image,
-                message: message,
-                updated: new Date()
-            });
-        });
-    }
-});
+isUserOnline = function(userId) {
+    return !!UsersOnline.findOne({'user._id': { $in: [userId] }});
+};
+
+/**
+ * Test
+ */
+// Meteor.setInterval(function(){
+//     // console.log('userOnline', UsersOnline.find({}).count());
+//     // UsersOnline.find({}).forEach(function(u){
+//     //     console.log(u);
+//     // });
+// }, 3000);

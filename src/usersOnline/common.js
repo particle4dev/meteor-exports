@@ -1,0 +1,1 @@
+collectionUserName = '__usersonline__';
