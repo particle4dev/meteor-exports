@@ -1,6 +1,6 @@
 Package.describe({
     summary: "exports some private function",
-    version: "1.1.1",
+    version: "1.1.2",
     name: "particle4dev:exports",
     git: "https://github.com/particle4dev/meteor-exports.git"
 });
@@ -10,7 +10,7 @@ server        = ['server'],
 both          = ['server', 'client'];
 
 Package.onUse(function(api) {
-    api.versionsFrom('METEOR@0.9.1.1');
+    api.versionsFrom('1.0');
 
     api.use(['underscore', 'mongo'], both);
     api.use('accounts-base');

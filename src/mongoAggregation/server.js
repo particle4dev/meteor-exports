@@ -5,7 +5,9 @@ aggregates = (function () {
     var mongoDriver = MongoInternals.defaultRemoteCollectionDriver().mongo;
     return function (collectionName, pipeline) {
         var future = new Future();
-        var collection = mongoDriver._getCollection(collectionName);
+        
+        // https://github.com/meteor/meteor/blob/40ec4760f049b3a312b6b228aa4bf08f91f241aa/packages/mongo/mongo_driver.js#L240
+        var collection = mongoDriver.rawCollection(collectionName);
 
         collection.aggregate(pipeline, function (err, docs) {
             if (err) {
