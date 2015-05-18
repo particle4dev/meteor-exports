@@ -90,10 +90,12 @@ Accounts.onLogin(function (info) {
 
 //name String
 //Name of the record set. If null, the set has no name, and the record set is automatically sent to all connected clients.
+var userIdFilter = function (userId) {
+    return !!Package.autopublish;
+};
 Meteor.publish(null, function () {
-    var sub = this;
     if (!userIdFilter(this.userId)) {
-        sub.ready();
+        this.ready();
         return;
     }
     return UsersOnline.find();
@@ -101,9 +103,6 @@ Meteor.publish(null, function () {
     is_auto: true
 });
 
-var userIdFilter = function (userId) {
-    return !!Package.autopublish;
-};
 // XXX make this take effect at runtime too?
 UsersOnline.setUserIdFilter = function (filter) {
     userIdFilter = filter;

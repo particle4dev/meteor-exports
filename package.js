@@ -1,6 +1,6 @@
 Package.describe({
     summary: "exports some private function",
-    version: "1.1.2",
+    version: "1.1.3",
     name: "particle4dev:exports",
     git: "https://github.com/particle4dev/meteor-exports.git"
 });
